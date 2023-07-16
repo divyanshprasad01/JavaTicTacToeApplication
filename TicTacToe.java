@@ -25,14 +25,7 @@ public class TicTacToe extends JPanel implements ActionListener {
             button[i].addActionListener(this);
         }
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(2000);
-                headPanel.textField.setText("Player X Turn");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+
 
 
     }
@@ -50,6 +43,13 @@ public class TicTacToe extends JPanel implements ActionListener {
                         countPlayerO++;
                         if (countPlayerO >= 3) {
                             if(checkIfWinner()){
+                                int val = JOptionPane.showConfirmDialog(null,"Want To Play Again??", "" , JOptionPane.YES_NO_OPTION);
+                                if(val == 0){
+                                    restart();
+                                    break;
+                                }else{
+                                    System.exit(0);
+                                }
                                 break;
                             }
                         }
@@ -77,7 +77,13 @@ public class TicTacToe extends JPanel implements ActionListener {
                         countPlayerX++;
                         if (countPlayerX >= 3) {
                             if(checkIfWinner()){
-                                break;
+                                int val = JOptionPane.showConfirmDialog(null,"Want To Play Again??", "" , JOptionPane.YES_NO_OPTION);
+                                if(val == 0){
+                                    restart();
+                                    break;
+                                }else{
+                                    System.exit(0);
+                                }
                             }
                         }
                         playerOne = true;
@@ -99,8 +105,6 @@ public class TicTacToe extends JPanel implements ActionListener {
                 }
             }
         }
-
-
     }
 
     public boolean checkIfWinner() {
@@ -235,5 +239,21 @@ public class TicTacToe extends JPanel implements ActionListener {
         
     }
 
+    public void restart(){
+        for(int i=0; i<9; i++){
+            button[i].setText("");
+            button[i].setBackground(new Color(0x053742));
+        }
+        headPanel.textField.setText("New Game!! Best Of Luck..");
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                headPanel.textField.setText("Player X Turn");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        playerOne = false;
+    }
 
 }
