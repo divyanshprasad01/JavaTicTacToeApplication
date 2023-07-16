@@ -9,7 +9,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     volatile HeadPanel headPanel;
     boolean playerOne = false;
 
-    int countPlayerO = 1, countPlayerX = 1;
+    int countPlayerO = 0, countPlayerX = 0;
 
     TicTacToe(HeadPanel headPanel) {
         this.headPanel = headPanel;
@@ -24,9 +24,6 @@ public class TicTacToe extends JPanel implements ActionListener {
             button[i].setBackground(new Color(0x053742));
             button[i].addActionListener(this);
         }
-
-
-
 
     }
 
@@ -104,6 +101,14 @@ public class TicTacToe extends JPanel implements ActionListener {
                     }
                 }
             }
+        }
+        if(countPlayerO+countPlayerX >= 9){
+           int val = JOptionPane.showConfirmDialog(null,"Great Competition, No One Won This Match!! Want to play again??","",JOptionPane.YES_NO_OPTION);
+           if(val == 0){
+               restart();
+           }else{
+               System.exit(0);
+           }
         }
     }
 
@@ -245,6 +250,8 @@ public class TicTacToe extends JPanel implements ActionListener {
             button[i].setBackground(new Color(0x053742));
         }
         headPanel.textField.setText("New Game!! Best Of Luck..");
+        countPlayerO = 0;
+        countPlayerX = 0;
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
