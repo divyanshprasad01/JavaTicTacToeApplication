@@ -25,6 +25,15 @@ public class TicTacToe extends JPanel implements ActionListener {
             button[i].addActionListener(this);
         }
 
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                headPanel.textField.setText("Player X Turn");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 
 
@@ -39,12 +48,12 @@ public class TicTacToe extends JPanel implements ActionListener {
                         button[i].setFont(new Font("Helvetica", Font.BOLD, 50));
                         countPlayerO++;
                         if (countPlayerO >= 3) {
-                            if(checkIfWinner()){
-                                int val = JOptionPane.showConfirmDialog(null,"Want To Play Again??", "" , JOptionPane.YES_NO_OPTION);
-                                if(val == 0){
+                            if (checkIfWinner()) {
+                                int val = JOptionPane.showConfirmDialog(null, "Want To Play Again??", "", JOptionPane.YES_NO_OPTION);
+                                if (val == 0) {
                                     restart();
                                     break;
-                                }else{
+                                } else {
                                     System.exit(0);
                                 }
                                 break;
@@ -53,17 +62,14 @@ public class TicTacToe extends JPanel implements ActionListener {
                         playerOne = false;
                         headPanel.textField.setText("Player X Turn");
                     } else {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                headPanel.textField.setText("This Place Is Already Taken!!");
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                }
-                                headPanel.textField.setText("Player O Turn");
+                        new Thread(() -> {
+                            headPanel.textField.setText("This Place Is Already Taken!!");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
+                            headPanel.textField.setText("Player O Turn");
                         }).start();
                     }
                 } else {
@@ -73,12 +79,12 @@ public class TicTacToe extends JPanel implements ActionListener {
                         button[i].setFont(new Font("Helvetica", Font.BOLD, 50));
                         countPlayerX++;
                         if (countPlayerX >= 3) {
-                            if(checkIfWinner()){
-                                int val = JOptionPane.showConfirmDialog(null,"Want To Play Again??", "" , JOptionPane.YES_NO_OPTION);
-                                if(val == 0){
+                            if (checkIfWinner()) {
+                                int val = JOptionPane.showConfirmDialog(null, "Want To Play Again??", "", JOptionPane.YES_NO_OPTION);
+                                if (val == 0) {
                                     restart();
                                     break;
-                                }else{
+                                } else {
                                     System.exit(0);
                                 }
                             }
@@ -86,29 +92,26 @@ public class TicTacToe extends JPanel implements ActionListener {
                         playerOne = true;
                         headPanel.textField.setText("Player O Turn");
                     } else {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                headPanel.textField.setText("This Place Is Already Taken!!");
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                }
-                                headPanel.textField.setText("Player X Turn");
+                        new Thread(() -> {
+                            headPanel.textField.setText("This Place Is Already Taken!!");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
+                            headPanel.textField.setText("Player X Turn");
                         }).start();
                     }
                 }
             }
         }
-        if(countPlayerO+countPlayerX >= 9){
-           int val = JOptionPane.showConfirmDialog(null,"Great Competition, No One Won This Match!! Want to play again??","",JOptionPane.YES_NO_OPTION);
-           if(val == 0){
-               restart();
-           }else{
-               System.exit(0);
-           }
+        if (countPlayerO + countPlayerX >= 9) {
+            int val = JOptionPane.showConfirmDialog(null, "Great Competition, No One Won This Match!! Want to play again??", "", JOptionPane.YES_NO_OPTION);
+            if (val == 0) {
+                restart();
+            } else {
+                System.exit(0);
+            }
         }
     }
 
@@ -120,7 +123,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[1].setBackground(new Color(0xA2DBFA));
                 button[2].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
 
@@ -128,55 +131,55 @@ public class TicTacToe extends JPanel implements ActionListener {
                 button[3].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[5].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[6].getText().equals("X") && button[7].getText().equals("X") && button[8].getText().equals("X")) {
                 button[6].setBackground(new Color(0xA2DBFA));
                 button[7].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[0].getText().equals("X") && button[3].getText().equals("X") && button[6].getText().equals("X")) {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[3].setBackground(new Color(0xA2DBFA));
                 button[6].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[1].getText().equals("X") && button[4].getText().equals("X") && button[7].getText().equals("X")) {
                 button[1].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[7].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[2].getText().equals("X") && button[5].getText().equals("X") && button[8].getText().equals("X")) {
                 button[2].setBackground(new Color(0xA2DBFA));
                 button[5].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[0].getText().equals("X") && button[4].getText().equals("X") && button[8].getText().equals("X")) {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
             } else if (button[2].getText().equals("X") && button[4].getText().equals("X") && button[6].getText().equals("X")) {
                 button[2].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[6].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player X has Won.");
                 return true;
-            }else{
+            } else {
                 return false;
             }
-            
+
         } else {
 
             if (button[0].getText().equals("O") && button[1].getText().equals("O") && button[2].getText().equals("O")) {
@@ -184,68 +187,68 @@ public class TicTacToe extends JPanel implements ActionListener {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[1].setBackground(new Color(0xA2DBFA));
                 button[2].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[3].getText().equals("O") && button[4].getText().equals("O") && button[5].getText().equals("O")) {
                 button[3].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[5].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[6].getText().equals("O") && button[7].getText().equals("O") && button[8].getText().equals("O")) {
                 button[6].setBackground(new Color(0xA2DBFA));
                 button[7].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[0].getText().equals("O") && button[3].getText().equals("O") && button[6].getText().equals("O")) {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[3].setBackground(new Color(0xA2DBFA));
                 button[6].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[1].getText().equals("O") && button[4].getText().equals("O") && button[7].getText().equals("O")) {
                 button[1].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[7].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[2].getText().equals("O") && button[5].getText().equals("O") && button[8].getText().equals("O")) {
                 button[2].setBackground(new Color(0xA2DBFA));
                 button[5].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[0].getText().equals("O") && button[4].getText().equals("O") && button[8].getText().equals("O")) {
                 button[0].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[8].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
             } else if (button[2].getText().equals("O") && button[4].getText().equals("O") && button[6].getText().equals("O")) {
                 button[2].setBackground(new Color(0xA2DBFA));
                 button[4].setBackground(new Color(0xA2DBFA));
                 button[6].setBackground(new Color(0xA2DBFA));
-                headPanel.textField.setFont(new Font("Helvetica" , Font.BOLD,30));
+                headPanel.textField.setFont(new Font("Helvetica", Font.BOLD, 30));
                 headPanel.textField.setText("Congratulations!! Player O has Won.");
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
         }
-        
+
     }
 
-    public void restart(){
-        for(int i=0; i<9; i++){
+    public void restart() {
+        for (int i = 0; i < 9; i++) {
             button[i].setText("");
             button[i].setBackground(new Color(0x053742));
         }

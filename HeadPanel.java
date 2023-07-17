@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HeadPanel extends JPanel{
-    JLabel textField = new JLabel();
+    final JLabel textField = new JLabel();
 
     HeadPanel(){
 
